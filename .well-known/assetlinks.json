@@ -5,7 +5,8 @@
       "namespace": "android_app",
       "package_name": "com.noclone.tessera",
       "sha256_cert_fingerprints": [
-        "42:F8:76:00:08:FA:D0:7B:FD:C4:AB:CB:91:B1:93:6D:E5:38:BE:72:A4:A3:F8:17:39:53:5B:9E:30:32:02:6D"
+        "42:F8:76:00:08:FA:D0:7B:FD:C4:AB:CB:91:B1:93:6D:E5:38:BE:72:A4:A3:F8:17:39:53:5B:9E:30:32:02:6D",
+        "61:BF:07:F8:5D:14:87:87:22:11:5F:09:AD:F7:2E:0F:28:0D:70:48:58:7B:66:D4:37:1C:0C:34:C0:26:D2:68"
       ]
     }
   }
