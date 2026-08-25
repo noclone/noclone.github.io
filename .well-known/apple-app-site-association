@@ -1,0 +1,12 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["YZ4VMXD77L.com.noclone.tessera"],
+        "components": [
+          { "/": "/tessera-join/*", "comment": "Liens d'invitation de groupe" }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rejoindre un groupe — Tessera</title>
+<style>
+  :root{
+    --bg:#0F1117; --surface:#171A22; --stroke:#262B36;
+    --text:#F2F4F8; --muted:#9AA3B2; --mint:#46E0B0; --cyan:#4CC7E6;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:440px;margin:0 auto;min-height:100dvh;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;padding:32px 22px;text-align:center;gap:18px}
+  .logo{width:76px;height:76px;border-radius:20px;
+    background:linear-gradient(135deg,var(--mint),var(--cyan));
+    display:flex;align-items:center;justify-content:center;font-size:38px;font-weight:800;color:#0F1117}
+  h1{font-size:22px;margin:6px 0 0}
+  p{color:var(--muted);font-size:15px;line-height:1.5;margin:0}
+  .code{font-size:30px;font-weight:800;letter-spacing:3px;padding:14px 22px;
+    background:var(--surface);border:1px solid var(--stroke);border-radius:14px;min-width:180px}
+  .code small{display:block;font-size:12px;font-weight:600;letter-spacing:1px;color:var(--muted);margin-bottom:4px}
+  .btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
+    padding:15px 18px;border-radius:14px;text-decoration:none;font-weight:700;font-size:16px}
+  .btn.primary{background:linear-gradient(135deg,var(--mint),var(--cyan));color:#0F1117}
+  .btn.store{background:var(--surface);border:1px solid var(--stroke);color:var(--text)}
+  .stores{display:flex;flex-direction:column;gap:10px;width:100%}
+  .foot{font-size:12px;color:var(--muted);margin-top:6px}
+  a.link{color:var(--mint)}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="logo">T</div>
+    <h1 data-i18n="title">Rejoindre un groupe</h1>
+    <p data-i18n="lead">Tu as été invité·e sur <b>Tessera</b>, le quiz culture-G quotidien entre amis.</p>
+
+    <div class="code" id="codeBox" hidden>
+      <small data-i18n="codeLabel">CODE DU GROUPE</small>
+      <span id="code">—</span>
+    </div>
+
+    <a class="btn primary" id="openBtn" href="#" data-i18n="open">Ouvrir dans Tessera</a>
+
+    <div class="stores">
+      <a class="btn store" id="playBtn"
+         href="https://play.google.com/store/apps/details?id=com.noclone.tessera"
+         data-i18n="play">📲 Installer sur Google Play</a>
+      <a class="btn store" id="appleBtn"
+         href="https://apps.apple.com/app/id6801572629"
+         data-i18n="apple"> Installer sur l'App Store</a>
+    </div>
+
+    <p class="foot" data-i18n="hint">Déjà l'app ? Touche « Ouvrir dans Tessera ». Sinon, installe-la puis
+      saisis le code du groupe dans l'onglet Groupes.</p>
+    <p class="foot"><a class="link" href="https://noclone.github.io/tessera-privacy/"
+      data-i18n="privacy">Politique de confidentialité</a></p>
+  </div>
+
+<script>
+  var I18N = {
+    fr: {
+      title:"Rejoindre un groupe",
+      lead:"Tu as été invité·e sur <b>Tessera</b>, le quiz culture-G quotidien entre amis.",
+      codeLabel:"CODE DU GROUPE",
+      open:"Ouvrir dans Tessera",
+      play:"📲 Installer sur Google Play",
+      apple:" Installer sur l'App Store",
+      hint:"Déjà l'app ? Touche « Ouvrir dans Tessera ». Sinon, installe-la puis saisis le code du groupe dans l'onglet Groupes.",
+      privacy:"Politique de confidentialité"
+    },
+    en: {
+      title:"Join a group",
+      lead:"You've been invited to <b>Tessera</b>, the daily trivia game with friends.",
+      codeLabel:"GROUP CODE",
+      open:"Open in Tessera",
+      play:"📲 Get it on Google Play",
+      apple:" Download on the App Store",
+      hint:"Already have the app? Tap “Open in Tessera”. Otherwise install it, then enter the group code in the Groups tab.",
+      privacy:"Privacy policy"
+    }
+  };
+  var lang = (navigator.language || "fr").toLowerCase().indexOf("fr") === 0 ? "fr" : "en";
+  document.documentElement.lang = lang;
+  var t = I18N[lang];
+  document.querySelectorAll("[data-i18n]").forEach(function(el){
+    var k = el.getAttribute("data-i18n"); if (t[k]) el.innerHTML = t[k];
+  });
+
+  var code = new URLSearchParams(location.search).get("g");
+  if (code) {
+    document.getElementById("code").textContent = code;
+    document.getElementById("codeBox").hidden = false;
+  }
+  // « Ouvrir dans Tessera » : re-viser le lien universel/App Link. S'il est
+  // vérifié et l'app installée, l'OS l'intercepte ; sinon on reste sur la page.
+  var openBtn = document.getElementById("openBtn");
+  openBtn.href = location.href;
+  openBtn.addEventListener("click", function(){ location.href = location.href; });
+</script>
+</body>
+</html>
