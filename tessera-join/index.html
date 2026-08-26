@@ -4,6 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rejoindre un groupe — Tessera</title>
+<script>
+  // Smart App Banner iOS : c'est le système qui sait si l'app est installée, et
+  // qui affiche « OUVRIR » ou « OBTENIR » en conséquence — sans alerte ni
+  // minuteur. Injectée ici (et non en dur) pour porter le lien courant en
+  // app-argument, afin que l'app reçoive le code à l'ouverture.
+  (function () {
+    var m = document.createElement('meta');
+    m.name = 'apple-itunes-app';
+    m.content = 'app-id=6801572629, app-argument=' + location.href;
+    document.head.appendChild(m);
+  })();
+</script>
 <style>
   :root{
     --bg:#0F1117; --surface:#171A22; --stroke:#262B36;
@@ -95,11 +107,38 @@
     document.getElementById("code").textContent = code;
     document.getElementById("codeBox").hidden = false;
   }
-  // « Ouvrir dans Tessera » : re-viser le lien universel/App Link. S'il est
-  // vérifié et l'app installée, l'OS l'intercepte ; sinon on reste sur la page.
+  // « Ouvrir dans Tessera ».
+  //
+  // Ne JAMAIS pointer sur location.href : un navigateur ne route pas vers l'app
+  // une navigation vers le domaine de la page affichée (règle iOS et Android),
+  // le bouton ne ferait que recharger la page. On passe donc par le schéma
+  // applicatif `tessera://`, lui toujours routé — y compris depuis les webviews
+  // intégrées (Instagram, Facebook…), où ni les liens universels ni la bannière
+  // iOS n'existent, et qui sont justement le cas où ce bouton est utile.
   var openBtn = document.getElementById("openBtn");
-  openBtn.href = location.href;
-  openBtn.addEventListener("click", function(){ location.href = location.href; });
+  var ua = navigator.userAgent || "";
+  var isAndroid = /Android/i.test(ua);
+  var isIOS = /iPhone|iPad|iPod/i.test(ua) ||
+              (/Mac/i.test(ua) && navigator.maxTouchPoints > 1);
+  var appUrl = "tessera://join" + (code ? "?g=" + encodeURIComponent(code) : "");
+
+  if (isAndroid) {
+    // Chrome gère le repli nativement : app si présente, Play Store sinon.
+    // Pas de minuteur, pas d'erreur affichée.
+    var fallback = encodeURIComponent(
+      "https://play.google.com/store/apps/details?id=com.noclone.tessera");
+    openBtn.href = "intent://join" + (code ? "?g=" + encodeURIComponent(code) : "") +
+      "#Intent;scheme=tessera;package=com.noclone.tessera;" +
+      "S.browser_fallback_url=" + fallback + ";end";
+  } else if (isIOS) {
+    // Pas de repli automatique vers l'App Store : la fiche n'est pas encore
+    // publiée, et c'est ce repli qui imposerait un minuteur. L'utilisateur sans
+    // l'app a les boutons d'installation juste en dessous.
+    openBtn.href = appUrl;
+  } else {
+    // Ordinateur : aucune app à ouvrir, le bouton n'a rien à promettre.
+    openBtn.hidden = true;
+  }
 </script>
 </body>
 </html>
