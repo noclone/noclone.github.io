@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tessera — Le quiz de culture générale entre amis</title>
+  <meta name="description" content="Tessera : une question de culture générale chaque jour, des paris de confiance et des classements entre amis." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #171b23;
+      --stroke: #262b36;
+      --text: #e8ecf2;
+      --muted: #8a94a6;
+      --mint: #33e6a0;
+      --cyan: #22d3ee;
+      --amber: #f7b955;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: 'Outfit', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+      background-image:
+        radial-gradient(60rem 60rem at 80% -10%, rgba(34, 211, 238, 0.10), transparent 60%),
+        radial-gradient(50rem 50rem at 0% 110%, rgba(51, 230, 160, 0.10), transparent 60%);
+      background-attachment: fixed;
+    }
+    main {
+      flex: 1;
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 72px 24px 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .logo {
+      font-weight: 900;
+      font-size: clamp(3rem, 12vw, 5rem);
+      letter-spacing: -0.03em;
+      background: linear-gradient(100deg, var(--cyan), var(--mint));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      line-height: 1.05;
+    }
+    .tagline {
+      margin-top: 14px;
+      font-size: clamp(1.05rem, 3.5vw, 1.35rem);
+      font-weight: 600;
+      color: var(--text);
+      max-width: 30ch;
+    }
+    .lead {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 1.02rem;
+      max-width: 46ch;
+    }
+    .features {
+      margin-top: 36px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      width: 100%;
+    }
+    .feature {
+      background: var(--surface);
+      border: 1px solid var(--stroke);
+      border-radius: 16px;
+      padding: 18px 16px;
+      text-align: left;
+    }
+    .feature .ico { font-size: 1.4rem; }
+    .feature h3 { margin-top: 8px; font-size: 1rem; font-weight: 700; }
+    .feature p { margin-top: 4px; font-size: 0.9rem; color: var(--muted); }
+    .badge {
+      margin-top: 36px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(247, 185, 85, 0.12);
+      border: 1px solid rgba(247, 185, 85, 0.4);
+      color: var(--amber);
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 8px 16px;
+      border-radius: 999px;
+    }
+    footer {
+      border-top: 1px solid var(--stroke);
+      padding: 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+    footer a { color: var(--mint); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .sep { margin: 0 10px; opacity: 0.4; }
+    @media (max-width: 480px) {
+      .features { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="logo">Tessera</div>
+    <p class="tagline">Le quiz de culture générale quotidien, entre amis.</p>
+    <p class="lead">
+      Une nouvelle question chaque jour. Mise sur ta confiance, grimpe dans les
+      classements et défie tes amis au sein de tes groupes.
+    </p>
+
+    <section class="features">
+      <div class="feature">
+        <div class="ico">🗓️</div>
+        <h3>Une question par jour</h3>
+        <p>QCM, ordre, frise, géo, estimation — la culture G sous toutes ses formes.</p>
+      </div>
+      <div class="feature">
+        <div class="ico">🎯</div>
+        <h3>Paris de confiance</h3>
+        <p>Mise gros quand tu es sûr : le score récompense l'audace maîtrisée.</p>
+      </div>
+      <div class="feature">
+        <div class="ico">👥</div>
+        <h3>Groupes d'amis</h3>
+        <p>Rejoins tes amis, compare vos réponses et couronnez un gagnant chaque mois.</p>
+      </div>
+      <div class="feature">
+        <div class="ico">🔥</div>
+        <h3>Séries &amp; classements</h3>
+        <p>Garde ta série vivante et vise le haut du tableau, jour après jour.</p>
+      </div>
+    </section>
+
+    <div class="badge">Bientôt sur Google Play &amp; l'App Store</div>
+  </main>
+
+  <footer>
+    <a href="/tessera-privacy/">Politique de confidentialité</a>
+    <span class="sep">·</span>
+    <a href="mailto:jean.fechter@gmail.com">Contact</a>
+  </footer>
+</body>
+</html>
